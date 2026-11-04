@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fbf4ea">
+    <meta name="description" content="فضاء | مصمم الوحدات — ثالثة ثانوي أدبي">
+
+    <title>فضاء | مصمم الوحدات — ثالثة ثانوي أدبي</title>
+
+
+    <!-- =====================================================
+         الخط العربي
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=block"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         مكتبة التصدير
+         تُحمَّل قبل app.js حتى لا يبدأ التصدير قبل جاهزيتها
+    ====================================================== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+    <!-- =====================================================
+         CSS (كل قواعد التصميم والتصدير داخل style.css)
+    ====================================================== -->
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     رأس التطبيق
+====================================================== -->
+
+<header class="app-header">
+
+    <div class="brand">
+
+        <div class="brand-icon">ف</div>
+
+        <div class="brand-info">
+            <h1>فضاء | مصمم الوحدات</h1>
+            <span>ثالثة ثانوي أدبي</span>
+        </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button type="button" class="icon-button" id="resetBtn" title="إعادة ضبط" aria-label="إعادة ضبط">↻</button>
+
+        <button type="button" class="help-button" id="helpBtn" title="مساعدة" aria-label="مساعدة">؟</button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     التطبيق
+====================================================== -->
+
+<main class="app-container">
+
+
+    <!-- =================================================
+         لوحة التحكم
+    ================================================== -->
+
+    <aside class="control-panel">
+
+
+        <div class="panel-heading">
+
+            <span class="panel-label">المحرر</span>
+
+            <h2>إعداد الوحدة</h2>
+
+            <p>اختر المادة، ثم اكتب اسم الوحدة وعنوانها.</p>
+
+        </div>
+
+
+        <!-- المادة -->
+
+        <section class="control-section">
+
+            <div class="section-title-row">
+
+                <label for="subject" class="section-title">المادة الدراسية</label>
+
+                <span class="subject-swatch" id="subjectSwatch" aria-hidden="true"></span>
+
+            </div>
+
+            <!-- تُملأ الخيارات من قائمة SUBJECTS في app.js -->
+            <select id="subject" class="form-select"></select>
+
+        </section>
+
+
+        <!-- بيانات الوحدة -->
+
+        <section class="control-section">
+
+            <label for="unitName" class="section-title">اسم الوحدة</label>
+
+            <input
+                type="text"
+                id="unitName"
+                class="form-input"
+                list="unitSuggestions"
+                maxlength="40"
+                placeholder="مثال: الوحدة الأولى"
+                autocomplete="off"
+            >
+
+            <datalist id="unitSuggestions">
+                <option value="الوحدة الأولى"></option>
+                <option value="الوحدة الثانية"></option>
+                <option value="الوحدة الثالثة"></option>
+                <option value="الوحدة الرابعة"></option>
+                <option value="الوحدة الخامسة"></option>
+                <option value="الوحدة السادسة"></option>
+                <option value="الوحدة السابعة"></option>
+                <option value="الوحدة الثامنة"></option>
+                <option value="الوحدة التاسعة"></option>
+                <option value="الوحدة العاشرة"></option>
+            </datalist>
+
+
+            <label for="unitTitle" class="section-title input-label">عنوان الوحدة</label>
+
+            <textarea
+                id="unitTitle"
+                class="form-textarea"
+                rows="3"
+                maxlength="200"
+                placeholder="اكتب عنوان الوحدة هنا..."
+            ></textarea>
+
+            <p class="field-hint" id="titleHint" aria-live="polite"></p>
+
+        </section>
+
+
+        <!-- النمط -->
+
+        <section class="control-section">
+
+            <div class="section-title-row">
+
+                <label class="section-title">النمط</label>
+
+                <span class="live-label">مباشر</span>
+
+            </div>
+
+            <div class="style-options">
+
+                <button type="button" class="style-option active" data-style="classic">
+                    <span class="style-preview style-one"></span>
+                    <span>كلاسيكي</span>
+                </button>
+
+                <button type="button" class="style-option" data-style="ink">
+                    <span class="style-preview style-two"></span>
+                    <span>حبر</span>
+                </button>
+
+                <button type="button" class="style-option" data-style="minimal">
+                    <span class="style-preview style-three"></span>
+                    <span>هادئ</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- الشعارات -->
+
+        <section class="control-section">
+
+            <label class="section-title">الشعارات</label>
+
+            <div class="logo-status">
+
+                <div class="logo-item" data-logo-item="fadaa">
+
+                    <div class="logo-mini">
+                        <img data-logo="fadaa" alt="" draggable="false">
+                    </div>
+
+                    <div class="logo-meta">
+                        <strong>شعار فضاء</strong>
+                        <small class="logo-path" dir="ltr" data-logo-path="fadaa"></small>
+                        <small class="logo-state" data-logo-state="fadaa">جارٍ التحقق…</small>
+                    </div>
+
+                    <span class="status-dot"></span>
+
+                </div>
+
+
+                <div class="logo-item" data-logo-item="team">
+
+                    <div class="logo-mini">
+                        <img data-logo="team" alt="" draggable="false">
+                    </div>
+
+                    <div class="logo-meta">
+                        <strong>شعار فريق النخبة</strong>
+                        <small class="logo-path" dir="ltr" data-logo-path="team"></small>
+                        <small class="logo-state" data-logo-state="team">جارٍ التحقق…</small>
+                    </div>
+
+                    <span class="status-dot"></span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- التصدير -->
+
+        <section class="control-section export-section">
+
+            <label class="section-title">التصدير</label>
+
+            <div class="export-info">
+
+                <div>
+                    <span>الصيغة</span>
+                    <strong>PNG</strong>
+                </div>
+
+                <div>
+                    <span>الجودة</span>
+                    <strong>عالية جدًا</strong>
+                </div>
+
+                <div>
+                    <span>المقاس</span>
+                    <strong dir="ltr">8500 × 5000</strong>
+                </div>
+
+            </div>
+
+            <button type="button" class="export-button" id="exportBtn">
+                <span>↓</span>
+                تصدير صورة الوحدة PNG
+            </button>
+
+        </section>
+
+    </aside>
+
+
+
+    <!-- =================================================
+         المعاينة
+    ================================================== -->
+
+    <section class="preview-area">
+
+
+        <div class="preview-header">
+
+            <div>
+                <span class="preview-label">المعاينة</span>
+                <h2>صورة الوحدة</h2>
+            </div>
+
+            <div class="preview-size" dir="ltr">8500 × 5000 px</div>
+
+        </div>
+
+
+        <!--
+            الحاوية تحافظ على نسبة 17:10 وتصغّر التصميم بصريًا فقط
+            ليناسب عرض الشاشة. التصميم نفسه يبقى 1700×1000 دائمًا،
+            والتصدير يتم على نسخة غير مصغّرة.
+        -->
+
+        <div class="canvas-wrapper" id="canvasWrapper">
+
+            <div class="canvas-scaler" id="canvasScaler">
+
+
+                <div
+                    id="designCanvas"
+                    class="design-canvas style-classic"
+                    dir="rtl"
+                    lang="ar"
+                >
+
+                    <!-- إطار مزدوج -->
+
+                    <div class="frame frame-outer" aria-hidden="true"></div>
+                    <div class="frame frame-inner" aria-hidden="true"></div>
+
+
+                    <!-- زخارف: كوكب بفوهات + حلقة + نجوم لامعة + نقاط -->
+
+                    <div class="decor decor-moon" aria-hidden="true">
+                        <i class="crater crater-a"></i>
+                        <i class="crater crater-b"></i>
+                    </div>
+
+                    <div class="decor decor-ring" aria-hidden="true"></div>
+
+                    <div class="decor decor-star star-a" aria-hidden="true">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fill="#f2bd8a" d="M50 0C54 30 70 46 100 50C70 54 54 70 50 100C46 70 30 54 0 50C30 46 46 30 50 0Z"/></svg>
+                    </div>
+
+                    <div class="decor decor-star star-b" aria-hidden="true">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path class="accent-path" fill="#9b3a26" d="M50 0C54 30 70 46 100 50C70 54 54 70 50 100C46 70 30 54 0 50C30 46 46 30 50 0Z"/></svg>
+                    </div>
+
+                    <div class="decor decor-star star-c" aria-hidden="true">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fill="#f2bd8a" d="M50 0C54 30 70 46 100 50C70 54 54 70 50 100C46 70 30 54 0 50C30 46 46 30 50 0Z"/></svg>
+                    </div>
+
+                    <div class="decor decor-star star-d" aria-hidden="true">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fill="#f2bd8a" d="M50 0C54 30 70 46 100 50C70 54 54 70 50 100C46 70 30 54 0 50C30 46 46 30 50 0Z"/></svg>
+                    </div>
+
+                    <i class="decor decor-dot dot-a" aria-hidden="true"></i>
+                    <i class="decor decor-dot dot-b" aria-hidden="true"></i>
+                    <i class="decor decor-dot dot-c" aria-hidden="true"></i>
+                    <i class="decor decor-dot dot-d" aria-hidden="true"></i>
+                    <i class="decor decor-dot dot-e" aria-hidden="true"></i>
+                    <i class="decor decor-dot dot-f" aria-hidden="true"></i>
+
+
+                    <!-- شعار فضاء — صورة فقط، بلا بديل عند الفشل -->
+
+                    <div class="canvas-logo project-logo">
+                        <img data-logo="fadaa" alt="" draggable="false" decoding="sync">
+                    </div>
+
+
+                    <!-- شعار فريق النخبة — صورة فقط، بلا بديل عند الفشل -->
+
+                    <div class="canvas-logo team-logo">
+                        <img data-logo="team" alt="" draggable="false" decoding="sync">
+                    </div>
+
+
+                    <!-- المحتوى: المادة، اسم الوحدة، عنوان الوحدة -->
+
+                    <div class="canvas-content">
+
+                        <!-- 1) اسم المادة -->
+
+                        <div class="subject-badge" id="subjectBadge">
+
+                            <svg class="badge-star" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path class="badge-path" fill="#f2bd8a" d="M50 0C54 30 70 46 100 50C70 54 54 70 50 100C46 70 30 54 0 50C30 46 46 30 50 0Z"/></svg>
+
+                            <span id="previewSubject" dir="rtl"></span>
+
+                            <svg class="badge-star" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path class="badge-path" fill="#f2bd8a" d="M50 0C54 30 70 46 100 50C70 54 54 70 50 100C46 70 30 54 0 50C30 46 46 30 50 0Z"/></svg>
+
+                        </div>
+
+
+                        <!-- 2) اسم الوحدة -->
+
+                        <div class="unit-display" id="previewUnit" dir="rtl"></div>
+
+
+                        <!-- فاصل -->
+
+                        <div class="title-decoration" aria-hidden="true">
+                            <span></span>
+                            <i><b></b></i>
+                            <span></span>
+                        </div>
+
+
+                        <!-- 3) عنوان الوحدة -->
+
+                        <div class="title-zone" id="titleZone">
+                            <h3 class="unit-title" id="previewTitle" dir="rtl"></h3>
+                        </div>
+
+
+                        <!-- زخرفة سفلية -->
+
+                        <div class="bottom-decoration" aria-hidden="true">
+                            <span></span>
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path class="accent-path" fill="#9b3a26" d="M50 0C54 30 70 46 100 50C70 54 54 70 50 100C46 70 30 54 0 50C30 46 46 30 50 0Z"/></svg>
+                            <span></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="preview-footer">
+
+            <div class="preview-status">
+                <span class="status-indicator"></span>
+                المعاينة محدّثة تلقائيًا
+            </div>
+
+            <div class="preview-ratio">نسبة التصميم 17 : 10</div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     نافذة المساعدة
+====================================================== -->
+
+<div class="modal" id="helpModal" aria-hidden="true">
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal-content">
+
+        <button type="button" class="modal-close" id="closeModal" aria-label="إغلاق">×</button>
+
+        <span class="modal-icon">✦</span>
+
+        <h2>مصمم الوحدات — ثالثة ثانوي أدبي</h2>
+
+        <p>
+            اختر المادة، ثم اكتب اسم الوحدة (مثل «الوحدة الأولى») وعنوانها.
+            تتحدث المعاينة تلقائيًا مع كل تعديل، ويتكيّف حجم العنوان مع طوله.
+        </p>
+
+        <p>
+            تُصدَّر الصورة بصيغة PNG وبمقاس 8500 × 5000 بكسل،
+            ويُنصح بالتصدير من حاسوب لأن الصورة كبيرة وتحتاج ذاكرة كافية.
+        </p>
+
+        <p>
+            لإظهار الشعارين ضع الملفين في المسارين المعروضين
+            في قسم «الشعارات»، وافتح الأداة عبر GitHub Pages أو خادم محلي.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
